@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earth Green - Bebidas y Tónicos Naturales</title>
+    <style>
+        :root {
+            --primary-color: #2E8B57;
+            --secondary-color: #3CB371;
+            --light-color: #F0FFF0;
+            --dark-color: #1A3A1A;
+            --accent-color: #000000;
+            --accent-green: #228B22;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: var(--light-color);
+            line-height: 1.6;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0 1rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .logo-earth {
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo-green {
+            color: var(--light-color);
+            font-style: italic;
+        }
+        
+        .tagline {
+            font-style: italic;
+            margin-top: 0.5rem;
+            letter-spacing: 1px;
+            font-size: 1.2rem;
+        }
+        
+        nav {
+            background-color: var(--dark-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        nav li {
+            margin: 0 1.5rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+        
+        nav a:hover {
+            background-color: var(--accent-green);
+            color: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .hero {
+            background-image: url('https://imgur.com/a/g0Yzy8w');
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(46, 125, 50, 0.7);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 2rem;
+        }
+        
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: green;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            animation: pulse 2s infinite;
+        }
+        
+        .btn:hover {
+            background-color: var(--accent-green);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            animation: none;
+        }
+        
+        .section {
+            margin-bottom: 4rem;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .section-title {
+            color: var(--dark-color);
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            display: inline-block;
+        }
+        
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .product-card {
+            background-color: light blue;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            border-top: 4px solid var(--accent-color);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .product-img {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-img img {
+            transform: scale(1.1);
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-title {
+            color: var(--dark-color);
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-desc {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .values {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem;
+            border-radius: 8px;
+            margin-bottom: 3rem;
+        }
+        
+        .value-item {
+            margin-bottom: 1.5rem;
+        }
+        
+        .value-item h3 {
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* === NUEVO: Estilos para la sección de Historia === */
+        .history-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .history-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .history-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .history-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .history-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .history-content {
+            padding: 1.5rem;
+        }
+        
+        .history-content h3 {
+            color: var(--dark-color);
+            margin-top: 0;
+        }
+        
+        .highlight {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .history-facts {
+            list-style: none;
+            padding: 0;
+            margin-top: 1rem;
+        }
+        
+        .history-facts li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .history-facts i {
+            color: var(--primary-color);
+        }
+        /* === Fin de estilos nuevos === */
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-card {
+            background-color: black;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            border-top: 4px solid var(--accent-color);
+            transition: all 0.3s;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .contact-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-logo .earth {
+            color: white;
+        }
+        
+        .footer-logo .green {
+            color: var(--secondary-color);
+            font-style: italic;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            background-color: var(--accent-green);
+            color: black;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+<div class="logo-container">
+    <img src="C:\Users\admin\Desktop\Earth green logo.lnk" alt="Earth Green Logo" style="height: 100px; width: auto;">
+
+            <span class="logo logo-earth">EARTH</span>
+                          
+            <span class="logo logo-green">GREEN</span>
+        </div>
+        <div class="tagline">En Earth Green celebramos la frescura y los sabores naturales de plantas aromaticas. Nos dedicamos a crear bebidas artesanales que revitalizan tu cuerpo y deleitan tus sentidos. Utilizamos ingredientes frescos y de la más alta calidad para ofrecerte una experiencia única y refrescante en cada sorbo. Nuestra pasión es brindarte productos deliciosos.</div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#productos">Productos</a></li>
+            <li><a href="#valores">Valores</a></li>
+            <li><a href="#historia">Historia</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <section id="inicio" class="hero">
+            <div class="hero-content">
+                <h2>Bebidas y Tónicos Naturales Artesanales</h2>
+                <p>Elaborados con plantas aromáticas de la más alta calidad para revitalizar tu cuerpo y deleitar tus sentidos</p>
+                <a href="#productos" class="btn">Conoce Nuestros Productos</a>
+            </div>
+        </section>
+        
+        <section id="productos" class="section">
+            <h2 class="section-title">Nuestros Productos</h2>
+            <div class="products">
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://www.actitudfem.com/media/files/media/files/tonico-casero-romero-tonico.jpg" alt="Tónico de Romero">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Tónico de Romero</h3>
+                        <p class="product-desc">Revitaliza tu cabello con nuestro tónico de romero, fortaleciendo las raíces y estimulando el crecimiento para un cabello radiante.</p>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://mui.kitchen/__export/1606791801544/sites/muikitchen/img/2020/11/30/6_limonada_3_unsplash.jpg_1557279016.jpg">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Limonada de Hierbabuena</h3>
+                        <p class="product-desc">Refréscate con nuestra limonada de hierbabuena, una explosión cítrica y mentolada perfecta para cualquier ocasión.</p>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://www.cocinadelirante.com/sites/default/files/images/2020/06/como-se-debe-tomar-la-infusion-de-romero-y-para-que-sirve.jpg">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Tizana de Romero</h3>
+                        <p class="product-desc">Disfruta de nuestra tizana de romero, una infusión refrescante y aromática llena de antioxidantes.</p>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://uploads.vibra.co/1/2021/06/para-que-sirve-el-te-de-hierbabuena-768x467.png">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Tizana de Hierbabuena</h3>
+                        <p class="product-desc">Sumérgete en la frescura de nuestra tizana de hierbabuena, una mezcla revitalizante perfecta para los días calurosos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="valores" class="section">
+            <div class="values">
+                <h2 class="section-title" style="color: white; border-color: var(--accent-green);">Conoce más sobre nosotros</h2>
+                
+                <div class="value-item">
+                    <h3>Valores institucionales</h3>
+                    <p>Sostenibilidad: compromiso con el uso de ingredientes naturales y prácticas de producción amigables con el medio ambiente.
+ Salud y bienestar: compromiso con la salud de los consumidores, ofreciendo productos que no solo son deliciosos sino que también promueven el bienestar general. (Sustainability: Commitment to the use of natural ingredients and environmentally friendly production practices.
+Health and Wellness: Commitment to consumer health, offering products that are not only delicious but also promote overall well-being).</p>
+                </div>
+                
+                <div class="value-item">
+                    <h3>Visión</h3>
+                    <p>Nuestra visión está enfocada en inspirar a las comunidades para que compren nuestros productos y adopten prácticas agrícolas responsables, fomentando la salud y el cuidado por el medio ambiente. A través de nuestros conocimientos y productos queremos generar conciencia sobre la importancia de cuidar nuestro planeta, por lo cual deseamos que nuestra empresa sea un modelo de innovación y responsabilidad social y ambiental, para lograr posicionarnos en el mercado como una gran compañía con reconocimiento nacional (Our vision is focused on inspiring communities to purchase our products and adopt responsible agricultural practices, promoting health and environmental stewardship. Through our knowledge and products, we aim to raise awareness about the importance of caring for our planet. We therefore aim to make our company a model of innovation and social and environmental responsibility, positioning ourselves in the market as a major company with national recognition).</p>
+                </div>
+                
+                <div class="value-item">
+                    <h3>Misión</h3>
+                    <p>Cultivamos más que alimentos, sembramos salud y sostenibilidad para un futuro más verde y saludable. Nuestra misión es proporcionar productos frescos y de alta calidad de plantas y hortalizas, promoviendo un estilo de vida saludable y amigable con el medio ambiente (We grow more than food; we sow health and sustainability for a greener, healthier future. Our mission is to provide fresh, high-quality plant and vegetable products, promoting a healthy and environmentally friendly lifestyle).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== NUEVA SECCIÓN DE HISTORIA ========== -->
+        <section id="historia" class="section">
+            <h2 class="section-title">El Legado de Nuestras Plantas</h2>
+            <div class="history-container">
+                <div class="history-card">
+                    <div class="history-img">
+                        <img src="https://solperunutrition.com/wp-content/uploads/2018/11/Beneficios-del-romero-1024x768-1024x768.jpg" alt="Historia del Romero">
+                    </div>
+                    <div class="history-content">
+                        <h3>Romero: <span class="highlight">Sabiduría Ancestral</span></h3>
+                        <p>El romero (<em>Rosmarinus officinalis</em>) ha sido venerado desde la antigüedad. Los egipcios lo colocaban en tumbas como símbolo de eternidad, los griegos lo asociaban a la diosa Afrodita y en la Edad Media se quemaba para purificar el aire durante epidemias. En Earth Green, rescatamos su esencia en productos que honran esta herencia milenaria.</p>
+                        <ul class="history-facts">
+                            <li><i class="fas fa-seedling"></i> <strong>Origen:</strong> Región mediterránea</li>
+                            <li><i class="fas fa-flask"></i> <strong>Beneficios:</strong> Mejora la memoria, antiinflamatorio y estimulante circulatorio</li>
+                            <li><i class="fas fa-history"></i> <strong>Dato curioso:</strong> Los estudiantes griegos llevaban guirnaldas de romero durante exámenes</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="history-card">
+                    <div class="history-img">
+                        <img src="https://4.bp.blogspot.com/-dU8xPzqOtWM/Ty69njQ95II/AAAAAAAAPao/OZiZzytVGOw/s1600/Botanic+Serrat+Mentha+spicata.JPG" alt="Historia de la Hierbabuena">
+                    </div>
+                    <div class="history-content">
+                        <h3>Hierbabuena: <span class="highlight">Frescura Atemporal</span></h3>
+                        <p>La hierbabuena (<em>Mentha spicata</em>) era usada por romanos en banquetes para alegrar el espíritu. Los árabes la introdujeron en Europa como planta medicinal, y en el siglo XVIII se descubrió su aceite esencial. Nuestras recetas preservan su frescura ancestral con un toque moderno.</p>
+                        <ul class="history-facts">
+                            <li><i class="fas fa-seedling"></i> <strong>Origen:</strong> Europa y Medio Oriente</li>
+                            <li><i class="fas fa-flask"></i> <strong>Beneficios:</strong> Alivia digestiones, despeja vías respiratorias</li>
+                            <li><i class="fas fa-history"></i> <strong>Dato curioso:</strong> En la antigua Grecia se frotaba en mesas para dar la bienvenida</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ========== FIN DE NUEVA SECCIÓN ========== -->
+        
+        <section id="contacto" class="section">
+            <h2 class="section-title">Contacto</h2>
+            <p>¿Quieres saber más sobre nuestros productos? ¡Contáctanos!</p>
+            
+            <div class="contact-info">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Ubicación</h3>
+                    <p>Herrera, Tolima<br>Colombia</p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3>Teléfono</h3>
+                    <p>322 942 8850<br>Disponible de lunes a sábado</p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email</h3>
+                    <p>Santiagotolima2009@gmail.com</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <span class="earth">EARTH</span> <span class="green">GREEN</span>
+                </div>
+                <p>Bebidas y tónicos artesanales elaborados con plantas aromáticas de la más alta calidad.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Productos</h3>
+                <ul>
+                    <li><a href="#">Tónico de Romero</a></li>
+                    <li><a href="#">Limonada de Hierbabuena</a></li>
+                    <li><a href="#">Tizana de Romero</a></li>
+                    <li><a href="#">Tizana de Hierbabuena</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Enlaces</h3>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#productos">Productos</a></li>
+                    <li><a href="#valores">Valores</a></li>
+                    <li><a href="#historia">Historia</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 Earth Green - Herrera, Tolima. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeIn 1s forwards';
+                    }
+                });
+            }, {threshold: 0.1});
+            
+            document.querySelectorAll('.section, .product-card, .contact-card, .history-card').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
